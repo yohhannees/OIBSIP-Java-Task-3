@@ -45,6 +45,7 @@ public class ATMInterface {
                     balance -= amount;
                     transactionHistory.add("Withdraw: -$" + amount);
                     updateTransactionHistory();
+                    updateBalanceLabel();
                 } else {
                     JOptionPane.showMessageDialog(frame, "Invalid withdrawal amount.");
                 }
@@ -60,6 +61,7 @@ public class ATMInterface {
                     balance += amount;
                     transactionHistory.add("Deposit: +$" + amount);
                     updateTransactionHistory();
+                    updateBalanceLabel();
                 } else {
                     JOptionPane.showMessageDialog(frame, "Invalid deposit amount.");
                 }
@@ -75,6 +77,7 @@ public class ATMInterface {
                     balance -= amount;
                     transactionHistory.add("Transfer: -$" + amount);
                     updateTransactionHistory();
+                    updateBalanceLabel();
                 } else {
                     JOptionPane.showMessageDialog(frame, "Invalid transfer amount.");
                 }
@@ -108,6 +111,13 @@ public class ATMInterface {
             historyText.append(transaction).append("\n");
         }
         transactionHistoryTextArea.setText(historyText.toString());
+    }
+
+    private void updateBalanceLabel() {
+        panel.remove(0); // Remove the old balance label
+        panel.add(new JLabel("Balance: $" + balance), 0); // Add the updated balance label
+        frame.revalidate();
+        frame.repaint();
     }
 
     public static void main(String[] args) {
